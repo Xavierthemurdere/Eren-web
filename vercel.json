@@ -1,5 +1,16 @@
 {
+  "version": 2,
   "functions": {
-    "api/discord.py": { "runtime": "python3.11" }
-  }
+    "api/**/*.py": {
+      "runtime": "python3.11"
+    }
+  },
+  "builds": [
+    { "src": "public/**/*", "use": "@vercel/static" },
+    { "src": "api/**/*.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1.py" },
+    { "src": "/(.*)", "dest": "/public/$1" }
+  ]
 }
